@@ -36,9 +36,9 @@ if __name__ == '__main__':
 
     # Three assembly files are loaded in: Base, v1 (identical), v2 (slightly adapted)
 
-    Base_Assembly = PartChecker("GearboxAssembly_v3.FCStd")
-    Assembly_v1 = PartChecker("GearboxAssembly_v3_ID.FCStd")
-    Assembly_v2 = PartChecker("GearboxAssembly_v3_NON_ID.FCStd")
+    Base_Assembly = PartChecker("./assemblies/GearboxAssembly_v3.FCStd")
+    Assembly_v1 = PartChecker("./assemblies/GearboxAssembly_v3_ID.FCStd")
+    Assembly_v2 = PartChecker("./assemblies/GearboxAssembly_v3_NON_ID.FCStd")
     # difference compared to Base: All labels renamed,
     # Small gear displaced
 
