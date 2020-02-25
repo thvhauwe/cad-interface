@@ -2,7 +2,7 @@
 
 
 ### Requirements:
-1. FreeCAD `v >=0.18` Available from http://www.freecadweb.org
+1. FreeCAD `ver >=0.18` Available from http://www.freecadweb.org
 1. PyCharm IDE
 
 
