@@ -34,13 +34,14 @@ import numpy as np
 
 if __name__ == '__main__':
 
-    # Three assembly files are loaded in: Base, v1 (identical), v2 (slightly adapted)
+    # Three assembly files are loaded in: Base, GearboxAssembly_v3_ID (identical to Base), 
+    # GearboxAssembly_v3_NON_ID (slightly adapted):
+    # difference compared to Base: All labels renamed, Small gear displaced
 
     Base_Assembly = PartChecker("./assemblies/GearboxAssembly_v3.FCStd")
     Assembly_v1 = PartChecker("./assemblies/GearboxAssembly_v3_ID.FCStd")
     Assembly_v2 = PartChecker("./assemblies/GearboxAssembly_v3_NON_ID.FCStd")
-    # difference compared to Base: All labels renamed,
-    # Small gear displaced
+    
 
 
     #  method `single_feature_check` checks two PartChecker objects for 1 property
