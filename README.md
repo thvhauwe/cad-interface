@@ -22,7 +22,7 @@ Supplementary material to support a submitted publication for CASE 2020.
 
 Tested on recent Windows 10.
 
-### 3. Installation 
+### 3. INSTALLATION
 ---------------------------
 
 Clone the repository:
@@ -42,7 +42,7 @@ Open the file `PartChecker_main.py`. The documententation is provided inline wit
 -------------
 
 
-### 7. License [MIT]
+### 7. LICENSE [MIT]
 ------------------------------------- 
 
 Supplemented in the `License.md` file.
