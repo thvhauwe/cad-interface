@@ -45,25 +45,9 @@ Open the file `PartChecker_main.py`. The documententation is provided inline wit
 ### 7. LICENSE [MIT]
 ------------------------------------- 
 
-Supplemented in the `License.md` file.
+Refer to the `LICENSE` file.
 
 
-### 8. CONTACTING THE AUTHOR(s)
----------------------------
-
-We would very much appreciate hearing from you if you use `cad-interface` and find problems,
-or if you can think of ways it could be improved - and even (or is that
-'especially'?) if you just think it's great. Even if the facility you would
-like to see appears to be of interest only to you, tell us about it - you'd be
-surprised how many ideas in that class have a much wider appeal.
-
-See above for further contact information.
-
-We read and consider all mail we receive, even though we may not have time
-to reply.
-
-
-### 9. ACKNOWLEDGEMENTS
+### 8. ACKNOWLEDGEMENTS
 -------------------
 
-[]
