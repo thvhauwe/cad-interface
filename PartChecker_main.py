@@ -31,41 +31,73 @@
 from PartChecker import PartChecker
 import FreeCAD
 import numpy as np
+import pandas as pd
 
 if __name__ == '__main__':
 
-    # Three assembly files are loaded in: Base, GearboxAssembly_v3_ID (identical to Base), 
-    # GearboxAssembly_v3_NON_ID (slightly adapted):
-    # difference compared to Base: All labels renamed, Small gear displaced
+    # Load the conrod parts:
+    D0 = PartChecker("./Parts/Conrod/Stang_met_gat150.STEP")
+    D1 = PartChecker("./Parts/Conrod/Stang_met_gat200.STEP")
+    D2 = PartChecker("./Parts/Conrod/Stang_met_gat250.STEP")
+    D3 = PartChecker("./Parts/Conrod/Stang_met_gat300.STEP")
+    D4 = PartChecker("./Parts/Conrod/Stang_met_gat350.STEP")
 
-    Base_Assembly = PartChecker("./assemblies/GearboxAssembly_v3.FCStd")
-    Assembly_v1 = PartChecker("./assemblies/GearboxAssembly_v3_ID.FCStd")
-    Assembly_v2 = PartChecker("./assemblies/GearboxAssembly_v3_NON_ID.FCStd")
-    
+    # Load the crank parts:
+    D_0 = PartChecker("./Parts/Crank/BASE050.STEP")
+    Da = PartChecker("./Parts/Crank/BASE060.STEP")
+    Db = PartChecker("./Parts/Crank/BASE070.STEP")
+    Dc = PartChecker("./Parts/Crank/BASE080.STEP")
+    Dd = PartChecker("./Parts/Crank/BASE090.STEP")
 
+    # Obtain the masses of conrods:
 
-    #  method `single_feature_check` checks two PartChecker objects for 1 property
+    mass_conrod = [D0.parts[0].Shape.Mass / D0.parts[0].Shape.Mass,
+                D1.parts[0].Shape.Mass / D0.parts[0].Shape.Mass,
+                D2.parts[0].Shape.Mass / D0.parts[0].Shape.Mass,
+                D3.parts[0].Shape.Mass / D0.parts[0].Shape.Mass,
+                D4.parts[0].Shape.Mass / D0.parts[0].Shape.Mass]
 
-    a, b, c = Base_Assembly.single_feature_check(Assembly_v1, 'Label')
-    x, y, z = Base_Assembly.single_feature_check(Assembly_v2,'Label')
+    # Obtain the inertia about the x-axis of conrods:
 
-    # Returns an exitcode (1 == identical for property, 2 == difference detected, other == error), a diff string, diff indices
-    # print(y) to see where Base and v2 differ and what the values are
-    print(y)
+    inertia_conrod = [D0.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)) / D0.parts[
+        0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)),
+                      D1.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)) / D0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)),
+                      D2.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)) / D0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)),
+                      D3.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)) / D0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)),
+                      D4.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0)) / D0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(1, 0, 0))]
 
-    # More realistic use-case: provide a list of properties/features to check if they match: ListOfFeatures (LOF)
+    # Obtain the masses of crank:
 
-    LOF=['Label','Shape.Mass','Shape.Volume','Shape.Placement.Base','Shape.Placement.Rotation']
-    p = Base_Assembly.compare(Assembly_v1, LOF)
-    q = Base_Assembly.compare(Assembly_v2, LOF)
+    mass_crank = [D_0.parts[0].Shape.Mass / D_0.parts[0].Shape.Mass,
+                  Da.parts[0].Shape.Mass / D_0.parts[0].Shape.Mass,
+                  Db.parts[0].Shape.Mass / D_0.parts[0].Shape.Mass,
+                  Dc.parts[0].Shape.Mass / D_0.parts[0].Shape.Mass,
+                  Dd.parts[0].Shape.Mass / D_0.parts[0].Shape.Mass]
 
-    # p,q == a dict
-    # One can act upon detected differences using `for k,v in p.items():`
+    # Obtain the inertia about the z-axis of the crank:
 
-    for k, v in q.items():
-        if v == 2:
-            # Difference detected between Base and Assembly_v2 for this problem, fetching the diff string:
-            print(f'Got an exitcode 2 for property {k}, fetching diff-string:')
-            a, b, c = Base_Assembly.single_feature_check(Assembly_v2, k)
-            print(b)
+    inertia_crank = [D_0.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)) / D_0.parts[
+        0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)),
+                      Da.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)) / D_0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)),
+                      Db.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)) / D_0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)),
+                      Dc.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)) / D_0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)),
+                      Dd.parts[0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1)) / D_0.parts[
+                          0].Shape.getMomentOfInertia(FreeCAD.Vector(0, 0, 0), FreeCAD.Vector(0, 0, 1))]
 
+    # Place the results in a table:
+    d1 = {'$L_2$': [150, 200, 250, 300, 350], '$M_2$': mass_conrod, '$J_2$':inertia_conrod}
+    df = pd.DataFrame(data=d1)
+    df.to_csv('conrods.csv')
+    df.to_latex("conrods.tex",float_format="%.2f")
+
+    d2 = {'$L_1$': [50, 60, 70, 80, 90], '$M_1$': mass_crank, '$J_1$':inertia_crank}
+    df2 = pd.DataFrame(data=d2)
+    df2.to_csv('cranks.csv')
+    df2.to_latex("cranks.tex",float_format="%.2f")
