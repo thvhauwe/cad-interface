@@ -27,7 +27,6 @@ def loadAssemblyFromFile(file):
 
     if file.__contains__(".STEP") or file.__contains__(".step"):
         Import.open(file)
-        # App.setActiveDocument("Unnamed")
         doc = App.activeDocument()
         doc = FreeCAD.ActiveDocument
         objs = FreeCAD.ActiveDocument.Objects
