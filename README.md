@@ -3,11 +3,11 @@
 This python module allows to import CAD files saved in the neutral `STEP` format, standarized in ISO (AP203)
 
 
-Corresponding Author: Thijs.vanhauwermeiren@UGent.be
-Supervisor: Guillaume.crevecoeur@UGent.be 
-Organization website: http://www.ugent.be/m-f/en 
+Corresponding Author: Thijs.vanhauwermeiren@UGent.be  
+Supervisor: Guillaume.crevecoeur@UGent.be   
+Organization website: http://www.ugent.be/m-f/en   
 
-----
+
 
 ### 1. ABSTRACT
 ----
