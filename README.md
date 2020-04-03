@@ -31,5 +31,5 @@ Clone the repository:
 ------------------
 
 Objects can be created by importing `PartChecker.py`. The STEP files used in the publication are available in `./parts`.  
-Example usage is in file `PartChecker_main.py`. The documententation is provided inline with the code.
+Example usage to compare properties of parts is in `example_parts.py`, for assemblies in `example_assembly.py` The documententation is provided inline with the code.
 
