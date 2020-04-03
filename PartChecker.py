@@ -2,9 +2,13 @@
 
 import FreeCAD
 import FreeCAD as App
+import Import
 import Part
 import numpy as np
 import warnings as warn
+import traceback
+import numbers
+import math
 
 # End of FreeCAD specific imports
 # -----
@@ -13,12 +17,22 @@ def loadAssemblyFromFile(file):
 
     Open a 3D CAD assembly file, return the document object and [list of all the parts]
     """
+    if file.__contains__(".FCStd"):
 
-    FreeCAD.open(file)
-    doc = App.activeDocument()
-    doc = FreeCAD.ActiveDocument
-    objs = FreeCAD.ActiveDocument.Objects
-    return doc, objs
+        FreeCAD.open(file)
+        doc = App.activeDocument()
+        doc = FreeCAD.ActiveDocument
+        objs = FreeCAD.ActiveDocument.Objects
+        return doc, objs
+
+    if file.__contains__(".STEP") or file.__contains__(".step"):
+        Import.open(file)
+        # App.setActiveDocument("Unnamed")
+        doc = App.activeDocument()
+        doc = FreeCAD.ActiveDocument
+        objs = FreeCAD.ActiveDocument.Objects
+        return doc, objs
+
 
 
 def extractObjects(InputList: list, ID: str) -> list:
@@ -39,7 +53,7 @@ def extractObjects(InputList: list, ID: str) -> list:
     return filteredList
 
 
-def nestedCaller(obj:Part.Feature, key:str):
+def nestedCaller(obj, key:str):
     """
     Auxiliary method for nestedTester
 
@@ -47,7 +61,10 @@ def nestedCaller(obj:Part.Feature, key:str):
     :param key: field to call
     :return: object.field
     """
-    return getattr(obj, key)
+    if isinstance(obj, Part.Feature) or isinstance(obj, Part.Solid):
+        return getattr(obj, key)
+    else:
+        return -1
 
 
 def nestedTester(obj_b:Part.Feature, property:str):
@@ -92,6 +109,11 @@ class PartChecker:
 
                 for i in range(len(l1)):
                     check = nestedTester(l1[i], property) == nestedTester(l2[i], property)
+
+                    # overwrite in case of numeric property:
+                    if isinstance(nestedTester(l1[i], property), numbers.Number):
+                        check = math.isclose(nestedTester(l1[i], property), nestedTester(l2[i], property), rel_tol=1e-3)
+
                     statusmatrix[i, i] = check
                     if not check:
                         diff_elements.append(i)
@@ -111,6 +133,7 @@ class PartChecker:
             else:
                 exitcode = 3
         except Exception:
+            traceback.print_exc()
 
             warn.warn("--- An error occured in function call listCompare with inputs: ---")
             print(l1)
