@@ -1,17 +1,17 @@
 # FreeCAD specific imports:
-
 import FreeCAD
 import FreeCAD as App
 import Import
 import Part
+# End of FreeCAD specific imports
+# -----
+
 import numpy as np
 import warnings as warn
 import traceback
 import numbers
 import math
 
-# End of FreeCAD specific imports
-# -----
 def loadAssemblyFromFile(file):
     """loadAssemblyFromFile
 
