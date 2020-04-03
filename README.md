@@ -3,9 +3,9 @@
 This python module allows to import CAD files saved in the neutral `STEP` format, standarized in ISO (AP203)
 
 
-Corresponding Author	( Thijs.vanhauwermeiren@UGent.be )  
-Supervisor	( Guillaume.crevecoeur@UGent.be )    
-Website		( http://www.ugent.be/m-f/en )  
+Corresponding Author: Thijs.vanhauwermeiren@UGent.be
+Supervisor: Guillaume.crevecoeur@UGent.be 
+Organization website: http://www.ugent.be/m-f/en 
 
 ----
 
@@ -32,22 +32,4 @@ Clone the repository:
 ------------------
 
 Open the file `PartChecker_main.py`. The documententation is provided inline with the code.
-
-### 5. KNOWN LIMITATIONS/BUGS
--------------------------
-
-
-
-### 6. CHANGE LOG
--------------
-
-
-### 7. LICENSE [MIT]
-------------------------------------- 
-
-Refer to the `LICENSE` file.
-
-
-### 8. ACKNOWLEDGEMENTS
--------------------
 
