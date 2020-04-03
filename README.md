@@ -1,6 +1,6 @@
 # cad-interface
 
-This python module allows to import CAD files saved in the neutral `STEP` format, using FreeCAD
+**Cad-interface** allows to import, access, compare and manipulate CAD files saved in the neutral `STEP` format, using FreeCAD.
 
 Corresponding Author: Thijs.vanhauwermeiren@UGent.be  
 Supervisor: Guillaume.crevecoeur@UGent.be   
