@@ -1,18 +1,17 @@
 # cad-interface
 
-This python module allows to import CAD files saved in the neutral `STEP` format, standarized in ISO (AP203)
-
+This python module allows to import CAD files saved in the neutral `STEP` format, using FreeCAD
 
 Corresponding Author: Thijs.vanhauwermeiren@UGent.be  
 Supervisor: Guillaume.crevecoeur@UGent.be   
 Organization website: http://www.ugent.be/m-f/en   
 
-
+This script is supplementary material to support a submitted publication (Fast performance assessment of mechatronic designs integrating CAD and dynamical models with application on servo actuated designs) for IEEE CASE 2020.
 
 ### 1. ABSTRACT
 ----
-
-Supplementary material to support a submitted publication for CASE 2020.
+This scripts allows comparison between different designs of a mechanical assembly or part using the STEP file.
+All the parts are available as FreeCad `features`, which have properties `Mass`, `Volume`, `Label`, etc. Calculation of inertia is possible with the method `getMomentOfInertia (pos, rot)` with `pos` the (x,y,z) position and `rot` the rotation axis (as a vector). To compare the inertia of different parts, it is advised to model them such that the rotation center is fixed in the origin of the part, as such `pos = (0, 0, 0)`.
 
 ### 2. SOFTWARE DEPENDENCIES
 ----
@@ -31,5 +30,6 @@ Clone the repository:
 ### 4. GETTING STARTED
 ------------------
 
-Open the file `PartChecker_main.py`. The documententation is provided inline with the code.
+Objects can be created by importing `PartChecker.py`. The STEP files used in the publication are available in `./parts`.  
+Example usage is in file `PartChecker_main.py`. The documententation is provided inline with the code.
 
